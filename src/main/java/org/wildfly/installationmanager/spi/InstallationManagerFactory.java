@@ -16,7 +16,7 @@ public interface InstallationManagerFactory {
     InstallationManager create(Path installationDir, MavenOptions mavenOptions) throws Exception;
 
     /**
-     * Gets the name of InstallatioManager instance
+     * Gets the name of InstallationManager instance
      * @return
      */
     String getName();
