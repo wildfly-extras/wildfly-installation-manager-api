@@ -4,6 +4,7 @@ import org.wildfly.installationmanager.Channel;
 import org.wildfly.installationmanager.HistoryResult;
 import org.wildfly.installationmanager.ArtifactChange;
 
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 
@@ -73,5 +74,14 @@ public interface InstallationManager {
      * @param newChannel - modified {@code Channel} to be stored.
      * @throws Exception
      */
-    public void changeChannel(String channelName, Channel newChannel) throws Exception;
+    void changeChannel(String channelName, Channel newChannel) throws Exception;
+
+    /**
+     * Create a snapshot of installation's metadata and exports it as a zip bundle in {@code targetPath}.
+     *
+     * @param targetPath - path of the exported zip. If the path points to a directory, a file "im-snapshot-<TIMESTAMP>.zip" will be created
+     * @return path to the exported snapshot zip
+     * @throws Exception
+     */
+    Path createSnapshot(Path targetPath) throws Exception;
 }
