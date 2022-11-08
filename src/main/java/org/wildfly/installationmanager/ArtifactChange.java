@@ -50,6 +50,14 @@ public class ArtifactChange {
         return artifactName;
     }
 
+    public String getOldGav() {
+        return getArtifactName() + ":" + getOldVersion();
+    }
+
+    public String getNewGav() {
+        return getArtifactName() + ":" + getNewVersion();
+    }
+
     public Status getStatus() {
         return status;
     }
