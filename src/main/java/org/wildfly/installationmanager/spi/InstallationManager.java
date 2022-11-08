@@ -54,10 +54,10 @@ public interface InstallationManager {
     /**
      * Unsubscribes the server installation from a channel.
      *
-     * @param channel - {@code Channel} to be removed.
+     * @param channelName - name of the channel to be removed.
      * @throws Exception - if unable to read the installation metadata, or the Channel index doesn't exist
      */
-    void removeChannel(Channel channel) throws Exception;
+    void removeChannel(String channelName) throws Exception;
 
     /**
      * Subscribe the server installation to a new channel.
@@ -69,10 +69,9 @@ public interface InstallationManager {
 
     /**
      * Persists changes to a channel that the server installation is subscribed to.
-     *
-     * @param oldChannel
+     * @param channelName - name of the channel to modify
      * @param newChannel - modified {@code Channel} to be stored.
      * @throws Exception
      */
-    public void changeChannel(Channel oldChannel, Channel newChannel) throws Exception;
+    public void changeChannel(String channelName, Channel newChannel) throws Exception;
 }
