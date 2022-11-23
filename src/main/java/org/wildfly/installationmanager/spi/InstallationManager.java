@@ -1,5 +1,6 @@
 package org.wildfly.installationmanager.spi;
 
+import org.wildfly.installationmanager.InstallationChanges;
 import org.wildfly.installationmanager.Channel;
 import org.wildfly.installationmanager.HistoryResult;
 import org.wildfly.installationmanager.ArtifactChange;
@@ -18,12 +19,12 @@ public interface InstallationManager {
     List<HistoryResult> history() throws Exception;
 
     /**
-     * Return description of a changes with if {@code revision} from the managed server history.
+     * Return description of a changes since {@code revision} from the managed server history.
      *
      * @return
      * @throws Exception
      */
-    List<ArtifactChange> revisionDetails(String revision) throws Exception;
+    InstallationChanges revisionDetails(String revision) throws Exception;
 
 
     /**
