@@ -36,6 +36,16 @@ public interface InstallationManager {
     void update() throws Exception;
 
     /**
+     * Prepares an updated version of the server installation in {@code targetDir}.
+     * If no updates are found, this operation does nothing.
+     *
+     * @param targetDir {@code Path} were the updated version of the server should be located.
+     * @throws IllegalArgumentException if the Path is not writable
+     * @throws Exception
+     */
+    void prepareUpdate(Path targetDir) throws Exception;
+
+    /**
      * Lists updates available for the server installation.
      *
      * @return list of {@code ArtifactChange} available for update
