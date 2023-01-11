@@ -27,15 +27,6 @@ public interface InstallationManager {
      */
     InstallationChanges revisionDetails(String revision) throws Exception;
 
-
-    /**
-     * Performs update of the server installation.
-     * If no updates are found, this operation does nothing.
-     *
-     * @throws Exception
-     */
-    void update() throws Exception;
-
     /**
      * Prepares an updated version of the server installation in {@code targetDir}.
      * If no updates are found, this operation does nothing.
