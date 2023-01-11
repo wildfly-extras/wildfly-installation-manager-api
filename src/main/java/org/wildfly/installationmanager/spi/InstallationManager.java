@@ -28,6 +28,17 @@ public interface InstallationManager {
     InstallationChanges revisionDetails(String revision) throws Exception;
 
     /**
+     * Prepares a reverted version of the server installation in {@code targetDir}.
+     * 
+     * @param revision     hash of a revision record to be reverted to.
+     * @param targetDir    {@code Path} were the updated version of the server should be located.
+     * @param repositories List of repositories to be used to prepare this update.I f it is null or an empty list,
+     *                     the default repositories will be used instead.
+     * @throws Exception
+     */
+    void prepareRevert(String revision, Path targetDir, List<Repository> repositories) throws Exception;
+
+    /**
      * Prepares an updated version of the server installation in {@code targetDir}.
      * If no updates are found, this operation does nothing.
      *
