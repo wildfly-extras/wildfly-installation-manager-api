@@ -40,18 +40,9 @@ public interface InstallationManager {
      * Prepares an updated version of the server installation in {@code targetDir}.
      * If no updates are found, this operation does nothing.
      *
-     * @param targetDir {@code Path} were the updated version of the server should be located.
-     * @throws IllegalArgumentException if the Path is not writable
-     * @throws Exception
-     */
-    void prepareUpdate(Path targetDir) throws Exception;
-
-    /**
-     * Prepares an updated version of the server installation in {@code targetDir}.
-     * If no updates are found, this operation does nothing.
-     *
      * @param targetDir    {@code Path} were the updated version of the server should be located.
-     * @param repositories List of repositories to be used to prepare this update.
+     * @param repositories List of repositories to be used to prepare this update.I f it is null or an empty list,
+     *                     the default repositories will be used instead.
      * @throws IllegalArgumentException if the Path is not writable
      * @throws Exception
      */
@@ -60,16 +51,8 @@ public interface InstallationManager {
     /**
      * Lists updates available for the server installation.
      *
-     * @return list of {@code ArtifactChange} available for update
-     *
-     * @throws Exception
-     */
-    List<ArtifactChange> findUpdates() throws Exception;
-
-    /**
-     * Lists updates available for the server installation.
-     *
-     * @param repositories List of repositories to be used to find the available updates.
+     * @param repositories List of repositories to be used to find the available updates. If it is null or an empty list,
+     *                     the default repositories will be used instead.
      * @return list of {@code ArtifactChange} available for update
      * @throws Exception
      */
