@@ -11,7 +11,15 @@ public class MavenOptions {
 
 
     public MavenOptions(Path localRepository, boolean offline) {
-        this.localRepository = localRepository == null ? LOCAL_MAVEN_REPO : localRepository;
+        this(localRepository, false, offline);
+    }
+
+    public MavenOptions(Path localRepository, boolean noResolveLocalCache, boolean offline) {
+        if (noResolveLocalCache) {
+            this.localRepository = null;
+        } else {
+            this.localRepository = localRepository == null ? LOCAL_MAVEN_REPO : localRepository;
+        }
         this.offline = offline;
     }
 
