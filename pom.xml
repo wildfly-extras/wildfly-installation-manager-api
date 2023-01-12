@@ -32,5 +32,14 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.org.wildfly.security.elytron>2.0.0.Final</version.org.wildfly.security.elytron>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.wildfly.security</groupId>
+            <artifactId>wildfly-elytron-security-manager</artifactId>
+            <version>${version.org.wildfly.security.elytron}</version>
+        </dependency>
+    </dependencies>
 </project>
