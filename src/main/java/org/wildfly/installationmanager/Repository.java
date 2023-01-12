@@ -51,4 +51,8 @@ public class Repository {
                 ", url='" + url + '\'' +
                 '}';
     }
+
+    public String asFormattedString() {
+        return "id=" + id + "::" + "url=" + url;
+    }
 }
