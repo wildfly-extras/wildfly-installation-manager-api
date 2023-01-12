@@ -7,13 +7,9 @@ import java.util.Optional;
  */
 public class ChannelChange {
 
-    public enum Status {ADDED, REMOVED, MODIFIED}
-
     private Optional<Channel> oldChannel;
 
     private Optional<Channel> newChannel;
-
-    private final Status status;
 
     /**
      * constructs a channel change. At least one of the channels has to be non-null.
@@ -22,8 +18,7 @@ public class ChannelChange {
      * @param oldChannel
      * @param newChannel
      */
-    public ChannelChange(Channel oldChannel, Channel newChannel, Status status) {
-        this.status = status;
+    public ChannelChange(Channel oldChannel, Channel newChannel) {
         this.oldChannel = Optional.ofNullable(oldChannel);
         this.newChannel = Optional.ofNullable(newChannel);
 
@@ -35,10 +30,6 @@ public class ChannelChange {
                 !this.oldChannel.get().getName().equals(this.newChannel.get().getName())) {
             throw new IllegalArgumentException("Both channels has to have the same name");
         }
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     /**
