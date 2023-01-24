@@ -16,6 +16,8 @@ public class InstallationManagerFinder {
             for (InstallationManagerFactory imf : sl) {
                return Optional.of(imf);
             }
+        } catch (Exception e) {
+            // Cannot load InstallationManagerFactory service, ignored to return an empty Optional
         } finally {
             WildFlySecurityManager.setCurrentContextClassLoaderPrivileged(currentTccl);
         }
