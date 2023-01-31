@@ -22,11 +22,13 @@ import org.wildfly.installationmanager.InstallationChanges;
 import org.wildfly.installationmanager.Channel;
 import org.wildfly.installationmanager.HistoryResult;
 import org.wildfly.installationmanager.ArtifactChange;
+import org.wildfly.installationmanager.OperationNotAvailableException;
 import org.wildfly.installationmanager.Repository;
 
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface InstallationManager {
     /**
@@ -46,27 +48,27 @@ public interface InstallationManager {
     InstallationChanges revisionDetails(String revision) throws Exception;
 
     /**
-     * Prepares a reverted version of the server installation in {@code targetDir}.
+     * Prepares a reverted version of the server installation in {@code candidatePath}.
      * 
      * @param revision     hash of a revision record to be reverted to.
-     * @param targetDir    {@code Path} were the updated version of the server should be located.
+     * @param candidatePath    {@code Path} were the updated version of the server should be located.
      * @param repositories List of repositories to be used to prepare this update.I f it is null or an empty list,
      *                     the default repositories will be used instead.
      * @throws Exception
      */
-    void prepareRevert(String revision, Path targetDir, List<Repository> repositories) throws Exception;
+    void prepareRevert(String revision, Path candidatePath, List<Repository> repositories) throws Exception;
 
     /**
-     * Prepares an updated version of the server installation in {@code targetDir}.
+     * Prepares an updated version of the server installation in {@code candidatePath}.
      * If no updates are found, this operation does nothing.
      *
-     * @param targetDir    {@code Path} were the updated version of the server should be located.
+     * @param candidatePath    {@code Path} were the updated version of the server should be located.
      * @param repositories List of repositories to be used to prepare this update.I f it is null or an empty list,
      *                     the default repositories will be used instead.
      * @throws IllegalArgumentException if the Path is not writable
      * @throws Exception
      */
-    void prepareUpdate(Path targetDir, List<Repository> repositories) throws Exception;
+    void prepareUpdate(Path candidatePath, List<Repository> repositories) throws Exception;
 
     /**
      * Lists updates available for the server installation.
@@ -119,4 +121,24 @@ public interface InstallationManager {
      * @throws Exception
      */
     Path createSnapshot(Path targetPath) throws Exception;
+
+    /**
+     * Generate an apply update CLI command.
+     * The generated command can be run in separate process to apply changes.
+     *
+     * @param candidatePath - path to the update candidate
+     * @return a CLI command.
+     * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
+     */
+    String generateApplyUpdateCommand(Path candidatePath) throws OperationNotAvailableException;
+
+    /**
+     * Generate an apply rollback CLI command.
+     * The generated command can be run in separate process to apply changes.
+     *
+     * @param candidatePath
+     * @return a CLI command.
+     * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
+     */
+    String generateApplyRevertCommand(Path candidatePath) throws OperationNotAvailableException;
 }
