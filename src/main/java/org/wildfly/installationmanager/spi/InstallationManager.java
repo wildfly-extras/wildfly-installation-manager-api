@@ -67,8 +67,9 @@ public interface InstallationManager {
      *                     the default repositories will be used instead.
      * @throws IllegalArgumentException if the Path is not writable
      * @throws Exception
+     * @return true if the update candidate was generated, false if candidate was no generated due to not finding any pending updates
      */
-    void prepareUpdate(Path candidatePath, List<Repository> repositories) throws Exception;
+    boolean prepareUpdate(Path candidatePath, List<Repository> repositories) throws Exception;
 
     /**
      * Lists updates available for the server installation.
