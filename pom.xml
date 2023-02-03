@@ -6,7 +6,7 @@
 
     <groupId>org.wildfly.installation-manager</groupId>
     <artifactId>installation-manager-api</artifactId>
-    <version>1.0.0.Beta2</version>
+    <version>1.0.0.Beta3-SNAPSHOT</version>
 
     <parent>
         <groupId>org.jboss</groupId>
