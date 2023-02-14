@@ -29,9 +29,10 @@ public interface InstallationManagerFactory {
      *
      * @param installationDir
      * @param mavenOptions
+     * @param callback
      * @return
      */
-    InstallationManager create(Path installationDir, MavenOptions mavenOptions) throws Exception;
+    InstallationManager create(Path installationDir, MavenOptions mavenOptions, ProgressCallback callback) throws Exception;
 
     /**
      * Gets the name of InstallationManager instance
