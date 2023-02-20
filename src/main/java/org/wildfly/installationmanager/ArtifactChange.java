@@ -79,4 +79,15 @@ public class ArtifactChange {
     public Status getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ArtifactChange{");
+        sb.append("oldVersion='").append(oldVersion).append('\'');
+        sb.append(", newVersion='").append(newVersion).append('\'');
+        sb.append(", artifactName='").append(artifactName).append('\'');
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
+    }
 }
