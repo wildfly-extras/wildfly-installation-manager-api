@@ -108,11 +108,11 @@ public interface InstallationManager {
 
     /**
      * Persists changes to a channel that the server installation is subscribed to.
-     * @param channelName - name of the channel to modify
-     * @param newChannel - modified {@code Channel} to be stored.
-     * @throws Exception
+     *
+     * @param channel - modified {@code Channel} to be stored.
+     * @throws Exception - if the channel has no name defined or the channel name doesn't match any already present channels.
      */
-    void changeChannel(String channelName, Channel newChannel) throws Exception;
+    void changeChannel(Channel channel) throws Exception;
 
     /**
      * Create a snapshot of installation's metadata and exports it as a zip bundle in {@code targetPath}.
