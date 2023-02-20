@@ -119,7 +119,8 @@ public interface InstallationManager {
      *
      * @param targetPath - path of the exported zip. If the path points to a directory, a file "im-snapshot-<TIMESTAMP>.zip" will be created
      * @return path to the exported snapshot zip
-     * @throws Exception
+     * @throws IllegalArgumentException if the file already exist.
+     * @throws Exception                In case of an error.
      */
     Path createSnapshot(Path targetPath) throws Exception;
 
