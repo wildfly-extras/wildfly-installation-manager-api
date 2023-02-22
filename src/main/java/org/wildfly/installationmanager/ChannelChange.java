@@ -85,4 +85,14 @@ public class ChannelChange {
     public String getName() {
         return newChannel.isPresent() ? newChannel.get().getName() : oldChannel.get().getName();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ChannelChange{");
+        sb.append("oldChannel=").append(oldChannel);
+        sb.append(", newChannel=").append(newChannel);
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
+    }
 }
