@@ -34,27 +34,29 @@ public interface InstallationManager {
     /**
      * Return all changes from the managed server history.
      *
-     * @return
-     * @throws Exception
+     * @return A list of changes, or an empty list if no changes were found.
+     * @throws Exception In case of an error.
      */
     List<HistoryResult> history() throws Exception;
 
     /**
      * Return description of a changes since {@code revision} from the managed server history.
      *
-     * @return
-     * @throws Exception
+     * @param revision hash of a revision record to be reverted to. Cannot be {@code null}.
+     * @return An InstallationChanges instance including non-null lists that represent Artifacts and Channels changes.
+     * If there are no changes, the corresponding list will be empty.
+     * @throws Exception In case of an error.
      */
     InstallationChanges revisionDetails(String revision) throws Exception;
 
     /**
      * Prepares a reverted version of the server installation in {@code candidatePath}.
-     * 
-     * @param revision     hash of a revision record to be reverted to.
-     * @param candidatePath    {@code Path} were the updated version of the server should be located.
-     * @param repositories List of repositories to be used to prepare this update.I f it is null or an empty list,
-     *                     the default repositories will be used instead.
-     * @throws Exception
+     *
+     * @param revision      hash of a revision record to be reverted to.
+     * @param candidatePath {@code Path} were the updated version of the server should be located.
+     * @param repositories  List of repositories to be used to prepare this update.I f it is null or an empty list,
+     *                      the default repositories will be used instead.
+     * @throws Exception In case of an error.
      */
     void prepareRevert(String revision, Path candidatePath, List<Repository> repositories) throws Exception;
 
@@ -62,12 +64,12 @@ public interface InstallationManager {
      * Prepares an updated version of the server installation in {@code candidatePath}.
      * If no updates are found, this operation does nothing.
      *
-     * @param candidatePath    {@code Path} were the updated version of the server should be located.
-     * @param repositories List of repositories to be used to prepare this update.I f it is null or an empty list,
-     *                     the default repositories will be used instead.
-     * @throws IllegalArgumentException if the Path is not writable
-     * @throws Exception
+     * @param candidatePath {@code Path} were the updated version of the server should be located.
+     * @param repositories  List of repositories to be used to prepare this update.If it is null or an empty list,
+     *                      the default repositories will be used instead.
      * @return true if the update candidate was generated, false if candidate was no generated due to not finding any pending updates
+     * @throws IllegalArgumentException if the Path is not writable.
+     * @throws Exception                In case of an error.
      */
     boolean prepareUpdate(Path candidatePath, List<Repository> repositories) throws Exception;
 
@@ -76,8 +78,8 @@ public interface InstallationManager {
      *
      * @param repositories List of repositories to be used to find the available updates. If it is null or an empty list,
      *                     the default repositories will be used instead.
-     * @return list of {@code ArtifactChange} available for update
-     * @throws Exception
+     * @return list of {@code ArtifactChange} available for update.
+     * @throws Exception In case of an error.
      */
     List<ArtifactChange> findUpdates(List<Repository> repositories) throws Exception;
 
