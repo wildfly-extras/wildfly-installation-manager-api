@@ -26,11 +26,13 @@ public class HistoryResult {
     private String hash;
     private Instant timestamp;
     private String type;
+    private String description;
 
-    public HistoryResult(String hash, Instant timestamp, String type) {
+    public HistoryResult(String hash, Instant timestamp, String type, String description) {
         this.hash = hash;
         this.timestamp = timestamp;
         this.type = type;
+        this.description = description;
     }
 
     public String getType() {
@@ -45,16 +47,21 @@ public class HistoryResult {
         return timestamp;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HistoryResult that = (HistoryResult) o;
-        return Objects.equals(hash, that.hash) && Objects.equals(timestamp, that.timestamp) && type == that.type;
+        return Objects.equals(hash, that.hash) && Objects.equals(timestamp, that.timestamp)
+                && Objects.equals(type, that.type) && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hash, timestamp, type);
+        return Objects.hash(hash, timestamp, type, description);
     }
 }
