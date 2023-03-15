@@ -18,6 +18,7 @@
 
 package org.wildfly.installationmanager;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,8 +34,8 @@ public class InstallationChanges {
         Objects.requireNonNull(artifacts);
         Objects.requireNonNull(channels);
 
-        this.artifacts = artifacts;
-        this.channels = channels;
+        this.artifacts = Collections.unmodifiableList(artifacts);
+        this.channels = Collections.unmodifiableList(channels);
     }
 
     /**

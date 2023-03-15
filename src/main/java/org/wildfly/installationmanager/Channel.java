@@ -19,6 +19,7 @@
 package org.wildfly.installationmanager;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,7 +55,7 @@ public class Channel {
         Objects.requireNonNull(manifestUrl);
 
         this.name = name;
-        this.repositories = repositories;
+        this.repositories = Collections.unmodifiableList(repositories);
         this.manifestUrl = Optional.of(manifestUrl);
         this.manifestCoordinate = Optional.empty();
     }
@@ -65,7 +66,7 @@ public class Channel {
         Objects.requireNonNull(manifestCoordinate);
 
         this.name = name;
-        this.repositories = repositories;
+        this.repositories = Collections.unmodifiableList(repositories);
         this.manifestUrl = Optional.empty();
         this.manifestCoordinate = Optional.of(manifestCoordinate);
     }
@@ -75,7 +76,7 @@ public class Channel {
         Objects.requireNonNull(repositories);
 
         this.name = name;
-        this.repositories = repositories;
+        this.repositories = Collections.unmodifiableList(repositories);
         this.manifestUrl = Optional.empty();
         this.manifestCoordinate = Optional.empty();
     }
