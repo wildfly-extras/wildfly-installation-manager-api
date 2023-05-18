@@ -135,6 +135,7 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
+    @Deprecated
     String generateApplyUpdateCommand(Path scriptHome, Path candidatePath) throws OperationNotAvailableException;
 
     /**
@@ -146,5 +147,30 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
+    @Deprecated
     String generateApplyRevertCommand(Path scriptHome, Path candidatePath) throws OperationNotAvailableException;
+
+    /**
+     * Generate an apply update CLI command.
+     * The generated command can be run in separate process to apply changes.
+     *
+     * @param candidatePath - Specify the directory path of the candidate installation to apply.
+     * @param scriptHome - Specify the directory path containing the script used to execute the apply command.
+     * @param shell - Specify what shell should the script be runnable in
+     * @return a CLI command.
+     * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
+     */
+    String generateApplyUpdateCommand(Path scriptHome, Path candidatePath, OsShell shell) throws OperationNotAvailableException;
+
+    /**
+     * Generate an apply rollback CLI command.
+     * The generated command can be run in separate process to apply changes.
+     *
+     * @param candidatePath - Specify the directory path of the candidate installation to apply.
+     * @param scriptHome - Specify the directory path containing the script used to execute the apply command.
+     * @param shell - Specify what shell should the script be runnable in
+     * @return a CLI command.
+     * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
+     */
+    String generateApplyRevertCommand(Path scriptHome, Path candidatePath, OsShell shell) throws OperationNotAvailableException;
 }
