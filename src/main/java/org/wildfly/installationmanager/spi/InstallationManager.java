@@ -22,6 +22,7 @@ import org.wildfly.installationmanager.InstallationChanges;
 import org.wildfly.installationmanager.Channel;
 import org.wildfly.installationmanager.HistoryResult;
 import org.wildfly.installationmanager.ArtifactChange;
+import org.wildfly.installationmanager.ManifestVersion;
 import org.wildfly.installationmanager.OperationNotAvailableException;
 import org.wildfly.installationmanager.Repository;
 
@@ -173,4 +174,10 @@ public interface InstallationManager {
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
     String generateApplyRevertCommand(Path scriptHome, Path candidatePath, OsShell shell) throws OperationNotAvailableException;
+
+    /**
+     * Reports latest versions of manifests used in latest update/install operation for each registered channels.
+     * @return list of {@link ManifestVersion}s
+     */
+    Collection<ManifestVersion> getInstalledVersions();
 }
