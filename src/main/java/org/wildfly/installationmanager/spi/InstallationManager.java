@@ -178,6 +178,7 @@ public interface InstallationManager {
     /**
      * Reports latest versions of manifests used in latest update/install operation for each registered channels.
      * @return list of {@link ManifestVersion}s
+     * @throws Exception if there was an error reading the version information
      */
-    Collection<ManifestVersion> getInstalledVersions();
+    Collection<ManifestVersion> getInstalledVersions() throws Exception;
 }
