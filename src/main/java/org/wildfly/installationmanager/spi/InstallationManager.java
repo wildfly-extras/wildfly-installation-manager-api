@@ -18,6 +18,8 @@
 
 package org.wildfly.installationmanager.spi;
 
+import org.wildfly.installationmanager.CandidateType;
+import org.wildfly.installationmanager.FileConflict;
 import org.wildfly.installationmanager.InstallationChanges;
 import org.wildfly.installationmanager.Channel;
 import org.wildfly.installationmanager.HistoryResult;
@@ -29,7 +31,6 @@ import org.wildfly.installationmanager.Repository;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public interface InstallationManager {
     /**
@@ -209,4 +210,14 @@ public interface InstallationManager {
      * @throws Exception if there was an error reading the version information
      */
     Collection<ManifestVersion> getInstalledVersions() throws Exception;
+
+    /**
+     * Checks a candidate for update or revert at {@code candidatePath} and generates a list of potential file conflicts.
+     *
+     * @param candidatePath - location of the candidate server
+     * @param candidateType - the type of the candidate server
+     * @return collection of the {@code FileConflicts} or an empty collection if no conflicts were found.
+     * @throws Exception - if there was an exception accessing the server information or if the candidate is invalid
+     */
+    Collection<FileConflict> verifyCandidate(Path candidatePath, CandidateType candidateType) throws Exception;
 }
