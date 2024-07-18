@@ -31,7 +31,10 @@ public class HistoryResult {
     private String type;
     private String description;
 
-    @Deprecated
+    /**
+     * @deprecated Use {@link #HistoryResult(String, Instant, String, String, List)} instead
+     */
+    @Deprecated(forRemoval = true)
     public HistoryResult(String hash, Instant timestamp, String type, String description) {
         this(hash, timestamp, type, description, Collections.emptyList());
     }
