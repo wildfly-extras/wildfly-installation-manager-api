@@ -19,20 +19,23 @@
 package org.wildfly.installationmanager;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 public class HistoryResult {
 
+    private final List<ManifestVersion> versions;
     private String hash;
     private Instant timestamp;
     private String type;
     private String description;
 
-    public HistoryResult(String hash, Instant timestamp, String type, String description) {
+    public HistoryResult(String hash, Instant timestamp, String type, String description, List<ManifestVersion> versions) {
         this.hash = hash;
         this.timestamp = timestamp;
         this.type = type;
         this.description = description;
+        this.versions = versions;
     }
 
     public String getType() {
@@ -49,6 +52,10 @@ public class HistoryResult {
 
     public String getDescription() {
         return description;
+    }
+
+    public List<ManifestVersion> getVersions() {
+        return versions;
     }
 
     @Override
