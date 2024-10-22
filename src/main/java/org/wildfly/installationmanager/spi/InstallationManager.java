@@ -27,7 +27,9 @@ import org.wildfly.installationmanager.ArtifactChange;
 import org.wildfly.installationmanager.ManifestVersion;
 import org.wildfly.installationmanager.OperationNotAvailableException;
 import org.wildfly.installationmanager.Repository;
+import org.wildfly.installationmanager.TrustCertificate;
 
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
@@ -56,8 +58,11 @@ public interface InstallationManager {
      *
      * @param revision      hash of a revision record to be reverted to.
      * @param candidatePath {@code Path} were the updated version of the server should be located.
-     * @param repositories  List of repositories to be used to prepare this update.I f it is null or an empty list,
+     * @param repositories  List of repositories to be used to prepare this update.If it is null or an empty list,
      *                      the default repositories will be used instead.
+     * @throws org.wildfly.installationmanager.MissingSignatureException if the installation requires PGP checks
+     *                                                                   and one of the components is signed with an
+     *                                                                   unknown signature.
      * @throws Exception In case of an error.
      */
     void prepareRevert(String revision, Path candidatePath, List<Repository> repositories) throws Exception;
@@ -71,6 +76,9 @@ public interface InstallationManager {
      *                      the default repositories will be used instead.
      * @return true if the update candidate was generated, false if candidate was no generated due to not finding any pending updates
      * @throws IllegalArgumentException if the Path is not writable.
+     * @throws org.wildfly.installationmanager.MissingSignatureException if the installation requires PGP checks
+     *                                                                   and one of the components is signed with an
+     *                                                                   unknown signature.
      * @throws Exception                In case of an error.
      */
     boolean prepareUpdate(Path candidatePath, List<Repository> repositories) throws Exception;
@@ -220,4 +228,49 @@ public interface InstallationManager {
      * @throws Exception - if there was an exception accessing the server information or if the candidate is invalid
      */
     Collection<FileConflict> verifyCandidate(Path candidatePath, CandidateType candidateType) throws Exception;
+
+    /**
+     * adds the {@code certificate} to the installation's trusted certificates list and makes it available to verify installation
+     * components.
+     *
+     * @param certificate
+     * @throws Exception
+     */
+    void acceptTrustedCertificates(InputStream certificate) throws Exception;
+
+    /**
+     * remove the certificate identified by the {@code keyID} from the list of certificates trusted to verify installation
+     * components.
+     *
+     * @param keyID - hex form of the keyID
+     * @throws Exception
+     */
+    void revokeTrustedCertificate(String keyID) throws Exception;
+
+    /**
+     * list certificates trusted by the installation to verify components.
+     *
+     * @return
+     * @throws Exception
+     */
+    Collection<TrustCertificate> listTrustedCertificates() throws Exception;
+
+    /**
+     * download the certificate and parse it.
+     *
+     * @param cert - the input stream or armour-protected GPG certificate
+     * @return - certificate information
+     * @throws Exception - if unable to download the certificate or parse it.
+     */
+    TrustCertificate parseCertificate(InputStream cert) throws Exception;
+
+    /**
+     * attempts to download the certificates required to install components from the configured channels.
+     * Note this method will only download certificates defined in the installation's channel definition. If the
+     * components in the channel are signed with other signatures, those will not be resolved.
+     *
+     * @return - input streams of downloaded required certificates.
+     * @throws Exception - if unable to download the certificate.
+     */
+    Collection<InputStream> downloadRequiredCertificates() throws Exception;
 }
