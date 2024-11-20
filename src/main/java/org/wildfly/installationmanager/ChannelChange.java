@@ -37,8 +37,8 @@ public class ChannelChange {
      * constructs a channel change. At least one of the channels has to be non-null.
      * If both {@code oldChannel} and {@code newChannel} are provided their names have to be the same
      *
-     * @param oldChannel
-     * @param newChannel
+     * @param oldChannel - Old channel version
+     * @param newChannel - New channel version
      */
     public ChannelChange(Channel oldChannel, Channel newChannel, Status status) {
         this.status = status;
@@ -80,7 +80,7 @@ public class ChannelChange {
     /**
      * name of the modified channel
      *
-     * @return
+     * @return - name of the channel
      */
     public String getName() {
         return newChannel.isPresent() ? newChannel.get().getName() : oldChannel.get().getName();

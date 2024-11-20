@@ -25,7 +25,7 @@ import java.util.Objects;
 public class ManifestVersion {
 
     /**
-     * Type of the channel manifest - Maven GAV or an URL
+     * Type of the channel manifest - Maven GAV or a URL
      */
     public enum Type {MAVEN, URL}
 
@@ -47,7 +47,7 @@ public class ManifestVersion {
 
     /**
      * channel identifier - either Maven coordinate or an URL
-     * @return
+     * @return channel identifier
      */
     public String getChannelId() {
         return channelId;
@@ -55,7 +55,7 @@ public class ManifestVersion {
 
     /**
      * human read-able description of the channel version. Can be null if the description is not available.
-     * @return
+     * @return channel description
      */
     public String getDescription() {
         return description;
@@ -63,7 +63,7 @@ public class ManifestVersion {
 
     /**
      * version of the channel manifest. If the manifest is provided by URL, the hash of the resolved manifest is used instead of version
-     * @return
+     * @return channel version
      */
     public String getVersion() {
         return version;
