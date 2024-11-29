@@ -27,11 +27,21 @@ public interface InstallationManagerFactory {
      * Creates InstallationManger for server instance located at {@code installationDir}.
      * If the provided directory is empty, the manger needs to install the server before attempting any other operations.
      *
-     * @param installationDir the directory where the server is installed
-     * @param mavenOptions    the options to be used by the manager
+     * @param installationDir
+     * @param mavenOptions
      * @return the InstallationManager instance
+     * @return
      */
     InstallationManager create(Path installationDir, MavenOptions mavenOptions) throws Exception;
+
+    /**
+     * Checks if the installation can be managed by the installation manager.
+     *
+     * @param installationDir - path to the root of the server installation
+     * @return true if the installation contains required metadata,
+     *         false otherwise
+     */
+    boolean isManagedInstallation(Path installationDir);
 
     /**
      * Gets the name of InstallationManager instance
