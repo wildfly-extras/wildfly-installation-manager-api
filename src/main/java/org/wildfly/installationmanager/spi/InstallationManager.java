@@ -137,7 +137,7 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     String generateApplyUpdateCommand(Path scriptHome, Path candidatePath) throws OperationNotAvailableException;
 
     /**
@@ -149,7 +149,7 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     String generateApplyRevertCommand(Path scriptHome, Path candidatePath) throws OperationNotAvailableException;
 
     /**
@@ -162,7 +162,7 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     String generateApplyUpdateCommand(Path scriptHome, Path candidatePath, OsShell shell) throws OperationNotAvailableException;
 
     /**
@@ -175,7 +175,7 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     String generateApplyRevertCommand(Path scriptHome, Path candidatePath, OsShell shell) throws OperationNotAvailableException;
 
     /**
@@ -189,7 +189,9 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
-    String generateApplyUpdateCommand(Path scriptHome, Path candidatePath, OsShell shell, boolean noConflictsOnly) throws OperationNotAvailableException;
+    default String generateApplyUpdateCommand(Path scriptHome, Path candidatePath, OsShell shell, boolean noConflictsOnly) throws OperationNotAvailableException{
+        throw new UnsupportedOperationException("Method using noConflictsOnly argument is not implemented");
+    }
 
     /**
      * Generate an apply rollback CLI command.
@@ -202,7 +204,9 @@ public interface InstallationManager {
      * @return a CLI command.
      * @throws OperationNotAvailableException - if the installation manager CLI support is not installed
      */
-    String generateApplyRevertCommand(Path scriptHome, Path candidatePath, OsShell shell, boolean noConflictsOnly) throws OperationNotAvailableException;
+    default String generateApplyRevertCommand(Path scriptHome, Path candidatePath, OsShell shell, boolean noConflictsOnly) throws OperationNotAvailableException {
+        throw new UnsupportedOperationException("Method using noConflictsOnly argument is not implemented");
+    }
 
     /**
      * Reports latest versions of manifests used in latest update/install operation for each registered channels.
@@ -219,5 +223,7 @@ public interface InstallationManager {
      * @return collection of the {@code FileConflicts} or an empty collection if no conflicts were found.
      * @throws Exception - if there was an exception accessing the server information or if the candidate is invalid
      */
-    Collection<FileConflict> verifyCandidate(Path candidatePath, CandidateType candidateType) throws Exception;
+    default Collection<FileConflict> verifyCandidate(Path candidatePath, CandidateType candidateType) throws Exception {
+        throw new UnsupportedOperationException("Method verifyCandidate is not implemented");
+    }
 }
